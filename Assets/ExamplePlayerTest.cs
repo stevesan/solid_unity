@@ -7,12 +7,12 @@ public class ExamplePlayerTest
 {
 	[UnityTest]
 	public IEnumerator BasicPickupToggling() {
-		TestUtil.TestScene scene = new TestUtil.TestScene("PlayerPicksUpPill");
+		TestUtil.TestScene scene = new TestUtil.TestScene("ExamplePlayerTest");
 		yield return scene.LoadAndWait();
 
-		ExamplePlayer player = scene.FindRootObjectOfType<ExamplePlayer>("Player");
-		Pill pill = scene.FindRootObjectOfType<Pill>("Pill");
-		TestPlayerInput input = scene.FindRootObjectOfType<TestPlayerInput>("Player");
+		ExamplePlayer player = scene.FindRootComponent<ExamplePlayer>("Player");
+		Pill pill = scene.FindRootComponent<Pill>("Pill");
+		TestPlayerInput input = scene.FindRootComponent<TestPlayerInput>("Player");
 
 		Assert.IsFalse(pill.IsPickedUp());
         input.TriggerActionForNextFrame();

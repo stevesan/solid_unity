@@ -18,10 +18,12 @@ public static class TestUtil
 			this.sceneName = sceneName;
 		}
 
-		// Call like "yield return scene.LoadAndWait();"
+		// Usage: "yield return scene.LoadAndWait();"
+        // TODO: Ideally, this would be a static method we could 'await' on,
+        // and the class returned would be LoadedTestScene.
 		public IEnumerator LoadAndWait()
 		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene("PlayerPicksUpPill");
+			UnityEngine.SceneManagement.SceneManager.LoadScene(this.sceneName);
 
 			// Takes one more frame to actually load.
 			yield return null;
@@ -39,6 +41,7 @@ public static class TestUtil
 
 			if(rootObjs == null) {
 				rootObjs = new List<GameObject>();
+                // TODO can we check that we're the active scene? Or store a ref to 'scene'?
 				UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects(rootObjs);
 			}
 
@@ -48,7 +51,7 @@ public static class TestUtil
 		}
 
 		// This will assert-fail if the object isn't found OR if it doesn't have the expected component.
-		public TComponent FindRootObjectOfType<TComponent>(string objName) {
+		public TComponent FindRootComponent<TComponent>(string objName) {
 			GameObject obj = this.FindRootObject(objName);
 			TComponent component = obj.GetComponent<TComponent>();
 			Assert.IsNotNull(component, GetLogPrefix() + "Root object '"+objName+"' did not have expected component: "
