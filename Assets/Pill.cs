@@ -32,4 +32,8 @@ public class Pill : MonoBehaviour, IPickupable {
     public string GetName() {
         return this.name;
     }
+
+	public bool IsPickedUp() { 
+		return pickedUp;
+	}
 }

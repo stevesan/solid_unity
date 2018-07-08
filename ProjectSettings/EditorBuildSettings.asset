@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/TestScenes/PlayerPicksUpPill.unity
+    guid: 23b1f4e1db2154dc5abb4e5104151f6c

@@ -3,21 +3,20 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
-public class ExamplePlayerTest {
-
+public class ExamplePlayerTest
+{
 	[UnityTest]
-	public IEnumerator Initializes() {
-		GameObject pill = new GameObject("tested");
-		pill.AddComponent<Pill>();
-		var pupRef = pill.AddComponent<IPickupableReference>();
+	public IEnumerator BasicPickupToggling() {
+		TestUtil.TestScene scene = new TestUtil.TestScene("PlayerPicksUpPill");
+		yield return scene.LoadAndWait();
 
-		GameObject playerObj = new GameObject();
-		playerObj.SetActive(false); // So we get a chance to set fields
-		ExamplePlayer player = playerObj.AddComponent<ExamplePlayer>();
-		player.targetRef = pupRef;
+		ExamplePlayer player = scene.FindRootObjectOfType<ExamplePlayer>("Player");
+		Pill pill = scene.FindRootObjectOfType<Pill>("Pill");
 
-		playerObj.SetActive(true);
-
-		yield return null;
+		Assert.IsFalse(pill.IsPickedUp());
+		player.OnAction();
+		Assert.IsTrue(pill.IsPickedUp());
+		player.OnAction();
+		Assert.IsFalse(pill.IsPickedUp());
 	}
 }
