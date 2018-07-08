@@ -1,0 +1,1 @@
+Pretty simple sketch of using interfaces on MonoBehaviours/Unity components. The only novel thing here is 'InterfaceReference', which provides a way to hook up interface references in the editor. Let me know what you think!
