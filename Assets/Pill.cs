@@ -25,7 +25,7 @@ public class Pill : MonoBehaviour, IPickupable {
 
 	public void OnDrop(IPickupper picker) {
         pickedUp = false;
-        pickupCooldownSecs = 2f;
+        pickupCooldownSecs = 1f;
         this.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 

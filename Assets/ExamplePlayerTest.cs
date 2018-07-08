@@ -12,11 +12,16 @@ public class ExamplePlayerTest
 
 		ExamplePlayer player = scene.FindRootObjectOfType<ExamplePlayer>("Player");
 		Pill pill = scene.FindRootObjectOfType<Pill>("Pill");
+		TestPlayerInput input = scene.FindRootObjectOfType<TestPlayerInput>("Player");
 
 		Assert.IsFalse(pill.IsPickedUp());
-		player.OnAction();
+        input.TriggerActionForNextFrame();
+        yield return null;
+
 		Assert.IsTrue(pill.IsPickedUp());
-		player.OnAction();
+        input.TriggerActionForNextFrame();
+        yield return null;
+
 		Assert.IsFalse(pill.IsPickedUp());
 	}
 }

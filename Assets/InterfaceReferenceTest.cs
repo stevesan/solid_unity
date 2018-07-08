@@ -21,7 +21,7 @@ public class InterfaceReferenceTest
 	}
 
 	[UnityTest]
-	public IEnumerator TestReferenceComponentGetsExistingReference() {
+	public IEnumerator GetsExistingReference() {
 		GameObject go = new GameObject();
 		FooImpl pup = go.AddComponent<FooImpl>();
 		Assert.IsNotNull(pup);
@@ -35,7 +35,7 @@ public class InterfaceReferenceTest
 	}
 
 	[UnityTest]
-	public IEnumerator TestReferenceComponentErrorsWithMultipleImplementations() {
+	public IEnumerator MultipleImplementationsError() {
 		GameObject go = new GameObject();
 		FooImpl pup = go.AddComponent<FooImpl>();
 		FooImpl pup2 = go.AddComponent<FooImpl>();

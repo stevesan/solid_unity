@@ -27,11 +27,11 @@ public class PillTest {
         Assert.IsFalse(pickup.CanPickup(grabber));
 
         pickup.OnDrop(grabber);
-        // Should not be pickupable for 2 seconds of cooldown.
+        // Should not be pickupable for 1 second of cooldown.
         Assert.IsFalse(pickup.CanPickup(grabber));
 
         // Wait for cooldown - then should be pickupable.
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(1.1f);
 		Assert.IsTrue(pickup.CanPickup(grabber));
 	}
 
