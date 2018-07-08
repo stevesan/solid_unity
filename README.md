@@ -1,1 +1,3 @@
-Pretty simple sketch of using interfaces on MonoBehaviours/Unity components. The only novel thing here is 'InterfaceReference', which provides a way to hook up interface references in the editor. Let me know what you think!
+A simple (so far) Unity project where I try to adhere to good software engineering principles, like SOLID and unit testing. Unity makes this difficult at times, so let's see what we can do! Some things in here so far:
+- InterfaceReference - Unity doesn't allow editor fields for interface types, so this is a convenience wrapper for such a thing. See ExamplePlayer's "targetRef".
+- TestUtil.TestScene - It'd be nice if you could do unit testing purely in code, but it's not always possible. Hooking up serialized field values, for example, is kinda gross to do from code. So why not just set up a scene and take it from there? This is a utility class to help work with test scenes.
