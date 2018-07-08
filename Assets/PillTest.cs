@@ -35,5 +35,18 @@ public class PillTest {
 		Assert.IsTrue(pickup.CanPickup(grabber));
 	}
 
+	[UnityTest]
+	public IEnumerator TestPillExposedAsPickupable() {
+		GameObject pillGo = new GameObject();
+		Pill pill = pillGo.AddComponent<Pill>();
+		pillGo.AddComponent<IPickupableReference>();
+
+		IPickupableReference pillRef = pillGo.GetComponent<IPickupableReference>();
+		Assert.AreEqual(pill, pillRef.Get());
+
+		yield return null;
+	}
+
+
 
 }

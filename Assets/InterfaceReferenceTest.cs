@@ -7,22 +7,26 @@ using System.Text.RegularExpressions;
 
 public class InterfaceReferenceTest
 {
-	class TestPickupable : MonoBehaviour, IPickupable {
-		public bool CanPickup(IPickupper picker) {
-			return true;
-		}
-		public string GetName() { return "test"; }
-		public void OnPickup(IPickupper picker) {}
-		public void OnDrop(IPickupper picker) {}
+	interface IFoo
+	{
+		void DoFoo();
+	}
+
+	[RequireComponent(typeof(IFoo))]
+	class IFooReference : InterfaceReference<IFoo> {
+	}
+
+	class FooImpl : MonoBehaviour, IFoo {
+		public void DoFoo() {}
 	}
 
 	[UnityTest]
 	public IEnumerator TestReferenceComponentGetsExistingReference() {
 		GameObject go = new GameObject();
-		TestPickupable pup = go.AddComponent<TestPickupable>();
+		FooImpl pup = go.AddComponent<FooImpl>();
 		Assert.IsNotNull(pup);
 
-		PickupableReference reference = go.AddComponent<PickupableReference>();
+		IFooReference reference = go.AddComponent<IFooReference>();
 		Assert.IsNotNull(reference);
 
 		// The reference component should automatically pickup the actual interface reference.
@@ -33,16 +37,16 @@ public class InterfaceReferenceTest
 	[UnityTest]
 	public IEnumerator TestReferenceComponentErrorsWithMultipleImplementations() {
 		GameObject go = new GameObject();
-		TestPickupable pup = go.AddComponent<TestPickupable>();
-		TestPickupable pup2 = go.AddComponent<TestPickupable>();
+		FooImpl pup = go.AddComponent<FooImpl>();
+		FooImpl pup2 = go.AddComponent<FooImpl>();
 		Assert.IsNotNull(pup);
 		Assert.IsNotNull(pup2);
 
-		string componentName = typeof(TestPickupable).Name;
+		string componentName = typeof(FooImpl).Name;
 		LogAssert.Expect(LogType.Error, new Regex(@".*"+go.name+".*"));
 		LogAssert.Expect(LogType.Error, new Regex(@".*"+componentName+".*"));
 		LogAssert.Expect(LogType.Error, new Regex(@".*"+componentName+".*"));
-		PickupableReference reference = go.AddComponent<PickupableReference>();
+		IFooReference reference = go.AddComponent<IFooReference>();
 		Assert.IsNotNull(reference);
 
 		// The reference component should automatically pickup the actual interface reference.
