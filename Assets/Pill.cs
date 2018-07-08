@@ -7,11 +7,6 @@ public class Pill : MonoBehaviour, IPickupable {
     bool pickedUp = false;
     float pickupCooldownSecs = 0f;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
         if(pickupCooldownSecs > 0f) {

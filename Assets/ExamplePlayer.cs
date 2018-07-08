@@ -4,9 +4,13 @@ using UnityEngine;
 
 // Simple example that tries to pickup the in-editor-specified pickupable when you hit space.
 public class ExamplePlayer : MonoBehaviour, IPickupper {
-	[SerializeField] IPickupableReference targetRef;
+	public IPickupableReference targetRef;
 
 	bool carrying = false;
+
+	void Awake() {
+		Debug.Assert(targetRef != null);
+	}
 
 	// Update is called once per frame
 	void Update () {

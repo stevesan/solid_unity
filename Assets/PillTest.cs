@@ -47,6 +47,4 @@ public class PillTest {
 		yield return null;
 	}
 
-
-
 }
